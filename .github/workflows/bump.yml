@@ -1,0 +1,51 @@
+name: bump
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bump
+  cancel-in-progress: false
+
+env:
+  SOURCE_REPO: adaptlypost/adaptlypost-cli
+  BIN: adaptlypost
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - id: latest
+        run: |
+          TAG="$(gh release view --repo "$SOURCE_REPO" --json tagName --jq .tagName)"
+          echo "version=${TAG#v}" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - id: current
+        run: |
+          V="$(grep -oE '/download/v[0-9][^/]*/' "Formula/${BIN}.rb" | head -1 | tr -d '/' | sed 's/^download//;s/^v//')"
+          echo "version=$V" >> "$GITHUB_OUTPUT"
+
+      - name: bump
+        if: steps.latest.outputs.version != steps.current.outputs.version
+        run: |
+          V="${{ steps.latest.outputs.version }}"
+          BASE="https://github.com/$SOURCE_REPO/releases/download/v$V"
+          sha() {
+            curl -fsSL --proto '=https' --tlsv1.2 "$BASE/${BIN}_${V}_$1.tar.gz" | sha256sum | cut -d' ' -f1
+          }
+          python3 scripts/bump.py "$V" \
+            "$(sha darwin_arm64)" "$(sha darwin_x64)" \
+            "$(sha linux_arm64)"  "$(sha linux_x64)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -qam "[TASK] $BIN $V"
+          git push
