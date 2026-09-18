@@ -1,6 +1,7 @@
 # adaptlypost Homebrew tap
 
 ```bash
+brew trust adaptlypost/tap
 brew install adaptlypost/tap/adaptlypost
 ```
 
