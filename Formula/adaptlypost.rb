@@ -5,23 +5,23 @@ class Adaptlypost < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/adaptlypost/adaptlypost-cli/releases/download/v0.1.7/adaptlypost_0.1.7_darwin_arm64.tar.gz"
-      sha256 "a9410a471ccdbe17421761ea53339f9851793a634259da9276090e828b77fc6c"
+      url "https://github.com/adaptlypost/adaptlypost-cli/releases/download/v0.1.9/adaptlypost_0.1.9_darwin_arm64.tar.gz"
+      sha256 "bd29edd1d3c31873570aa65620276066ddebf4d802baab0a0a25f49b46656083"
     end
     on_intel do
-      url "https://github.com/adaptlypost/adaptlypost-cli/releases/download/v0.1.7/adaptlypost_0.1.7_darwin_x64.tar.gz"
-      sha256 "53aa6d0f061b440124e017a12d259e48dc26c16ca1b5e15ac60ef455d0a93cc5"
+      url "https://github.com/adaptlypost/adaptlypost-cli/releases/download/v0.1.9/adaptlypost_0.1.9_darwin_x64.tar.gz"
+      sha256 "3f27913ef0b07e3aa39200fe6131790ffcc9395d95ee0397dccba8c3e9cef2e7"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/adaptlypost/adaptlypost-cli/releases/download/v0.1.7/adaptlypost_0.1.7_linux_arm64.tar.gz"
-      sha256 "5ad0f61dda2a057228001fab14b16de973fcd343690b8355e3ad66cff23352b0"
+      url "https://github.com/adaptlypost/adaptlypost-cli/releases/download/v0.1.9/adaptlypost_0.1.9_linux_arm64.tar.gz"
+      sha256 "402cd75b04cfae7c6951b99ed17dcb0ab9254edb07256c5da52084b01b81058e"
     end
     on_intel do
-      url "https://github.com/adaptlypost/adaptlypost-cli/releases/download/v0.1.7/adaptlypost_0.1.7_linux_x64.tar.gz"
-      sha256 "bc1e5fc42b458abd332f47d1d82327ab868531b301e5c2db8949edbfa7b1ad11"
+      url "https://github.com/adaptlypost/adaptlypost-cli/releases/download/v0.1.9/adaptlypost_0.1.9_linux_x64.tar.gz"
+      sha256 "b339bbb8a82e27080e6cf36045aeff921a357e698b46a62185d26ad935200fd7"
     end
   end
 
